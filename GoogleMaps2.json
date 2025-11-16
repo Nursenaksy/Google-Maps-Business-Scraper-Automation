@@ -1,0 +1,214 @@
+{
+  "name": "GoogleMaps2",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4038fb59-2002-4842-8f2b-58b452f715d8",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "jsCode": "const v7 = () => {\n  return \"tttttttt-tttt-7xxx-yxxx-xxxxxxxxxxxx\"\n    .replace(/[xy]/g, function (c) {\n      const r = Math.trunc(Math.random() * 16);\n      const v = c == \"x\" ? r : (r & 0x3) | 0x8;\n      return v.toString(16);\n    })\n    .replace(/[t]{8}-[t]{4}/, function () {\n      const unixtimestamp = Date.now().toString(16).padStart(12, \"0\");\n      return unixtimestamp.slice(0, 8) + \"-\" + unixtimestamp.slice(8);\n    });\n};\n\nconst items = $input.all();\nconst dataWithId = items.map((item) => {\n  const uuid = v7();\n  return { json: { UUID: uuid, ...item.json } };\n});\n\nreturn dataWithId;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "af29821a-0f3e-4cd3-8efd-ea62c712c846",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1DnYiazeW9bfxFKb4cZ9De1u-XAUcGWG-i5lHY-axDBI",
+          "mode": "list",
+          "cachedResultName": "GoogleMapsMusteri",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DnYiazeW9bfxFKb4cZ9De1u-XAUcGWG-i5lHY-axDBI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sayfa1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DnYiazeW9bfxFKb4cZ9De1u-XAUcGWG-i5lHY-axDBI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "UUID",
+              "displayName": "UUID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Website",
+              "displayName": "Website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Rating",
+              "displayName": "Rating",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Opening Hourse",
+              "displayName": "Opening Hourse",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        416,
+        0
+      ],
+      "id": "00d17958-256f-42ce-9175-8a45d1445f84",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GwM10kTwb4MmAFuJ",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return { json: { response: \"ok \"}}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        0
+      ],
+      "id": "df268541-0a0f-49f3-b798-ca511bb969e9",
+      "name": "Code in JavaScript1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ebad2995-28cc-479a-9c64-665ac53ccf75",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "89e21a501d052b4de630815015dade9d810aebacfa6db427020a98a715dcf152"
+  },
+  "id": "Wz1X5zyNZipUJYi9",
+  "tags": []
+}
